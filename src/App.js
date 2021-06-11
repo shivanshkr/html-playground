@@ -94,9 +94,9 @@ class App extends React.Component {
               <textarea type="text" name="html" onChange={this.handleChange} />
             </form>
           </div> */}
-          <div className="col-4   h-100">
+          <div className="col-4 h-100">
             <span className="h-10">HTML</span>
-            <form className="h-90  d-grid">
+            <form className="h-90 d-grid">
               <CodeMirror
                 value={this.state.html}
                 options={{
