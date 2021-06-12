@@ -47,8 +47,6 @@ class App extends React.Component {
     })
   }
 
-
-
   handleChange1 = (field, value) => {
     this.setState({
       [field]: value
@@ -81,88 +79,72 @@ class App extends React.Component {
     })
   }
 
-
-
   render() {
     return (
       <>
-        <div className="h3 h-5 pt-2 text-success text-center">Welcome to the HTML CS and JS Editor. We provide inbuilt Bootstrap 5 support. </div>
-        <div className="row h-50">
-          {/* <div className="col-4 h-100">
-            <span className="h-10">HTML</span>
-            <form className="h-90 d-grid">
-              <textarea type="text" name="html" onChange={this.handleChange} />
-            </form>
-          </div> */}
-          <div className="col-4 h-100">
-            <span className="h-10">HTML</span>
-            <form className="h-90 d-grid">
-              <CodeMirror
-                value={this.state.html}
-                options={{
-                  mode: 'htmlmixed',
-                  theme: 'material',
-                  lineNumbers: true
-                }}
-                onBeforeChange={(editor, data, html) => {
-                  this.setState({ html });
-                }}
-                onChange={(editor, data, html) => {
-                  this.handleChange1("html", html)
-                }}
-              />
-            </form>
+        <div className="h4 pt-2 text-success text-center">Welcome to the HTML CS and JS Editor. We provide inbuilt Bootstrap 5 support. </div>
+        <div className="row mb-5 ">
+          <div className="col-sm-6 col-md-4 ">
+            <span className="">HTML</span>
+            <CodeMirror
+              value={this.state.html}
+              options={{
+                mode: 'htmlmixed',
+                theme: 'material',
+                lineNumbers: true
+              }}
+              onBeforeChange={(editor, data, html) => {
+                this.setState({ html });
+              }}
+              onChange={(editor, data, html) => {
+                this.handleChange1("html", html)
+              }}
+            />
           </div>
-          <div className="col-4 h-100">
-            <span className="h-10">CSS</span>
-            <form className="h-90 d-grid">
-              {/* <textarea type="text" name="css" onChange={this.handleChange} /> */}
-              <CodeMirror
-                value={this.state.css}
-                options={{
-                  mode: 'css',
-                  theme: 'material',
-                  lineNumbers: true
-                }}
-                onBeforeChange={(editor, data, css) => {
-                  this.setState({ css });
-                }}
-                onChange={(editor, data, css) => {
-                  this.handleChange1("css", css)
-                }}
-              />
-            </form>
+          <div className="col-sm-6 col-md-4 ">
+            <span className="">CSS</span>
+            <CodeMirror
+              value={this.state.css}
+              options={{
+                mode: 'css',
+                theme: 'material',
+                lineNumbers: true
+              }}
+              onBeforeChange={(editor, data, css) => {
+                this.setState({ css });
+              }}
+              onChange={(editor, data, css) => {
+                this.handleChange1("css", css)
+              }}
+            />
+            {/* </form> */}
           </div>
-          <div className="col-4 h-100">
-            <span className="h-10">JS</span>
-            <form className="h-90 d-grid">
-              {/* <textarea type="text" name="js" onChange={this.handleChange} /> */}
-              <CodeMirror
-                value={this.state.js}
-                options={{
-                  mode: 'javascript',
-                  theme: 'material',
-                  lineNumbers: true
-                }}
-                onBeforeChange={(editor, data, js) => {
-                  this.setState({ js });
-                }}
-                onChange={(editor, data, js) => {
-                  this.setState({ js });
-                }}
-              />
-              <button className="col-4 offset-4 mt-1 btn btn-success" type="button" onClick={this.runJS}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-play" viewBox="0 0 16 16">
-                  <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-                </svg>
-                Run JS</button>
-            </form>
+          <div className="col-sm-6 col-md-4 " style={{ position: "relative" }}>
+            <span className="">JS</span>
+            <CodeMirror
+              value={this.state.js}
+              options={{
+                mode: 'javascript',
+                theme: 'material',
+                lineNumbers: true
+              }}
+              onBeforeChange={(editor, data, js) => {
+                this.setState({ js });
+              }}
+              onChange={(editor, data, js) => {
+                this.setState({ js });
+              }}
+            />
+            <button className=" btn btn-success btn-floating" style={{ position: "relative", top: "-15%", left: "80%", borderRadius: "10%" }} type="button" onClick={this.runJS}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-play" viewBox="0 0 16 16">
+                <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+              </svg></button>
           </div>
-        </div>
-        <div className="row h-40">
-          <span className="h-10">Output</span>
-          <div className="col-12 h-85 ">
-            <iframe title="result" className="h-100 bg-light col-12" srcDoc={this.state.final}></iframe>
+          <div className="col-sm-6 col-md-12 ">
+            <span className="">Output</span>
+            <div className="col-12 h-90">
+              <iframe title="result" className="bg-light h-90 col-12" srcDoc={this.state.final}></iframe>
+            </div>
           </div>
         </div>
       </>
