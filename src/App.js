@@ -3,6 +3,7 @@ import React from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
+import { examples } from "./Example";
 
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/javascript/javascript';
@@ -16,6 +17,7 @@ class App extends React.Component {
       css: "",
       js: "",
       final: "",
+      examples: examples
     }
   }
 
@@ -37,7 +39,9 @@ class App extends React.Component {
           </style>
         </head>
         <body>
+        <div class="m-2">
           ${html}
+          </div>
           <script type="text/javascript">
             ${js}
           </script>
@@ -68,7 +72,9 @@ class App extends React.Component {
           </style>
         </head>
         <body>
-          ${html}
+        <div class="m-2">
+        ${html}
+          </div>
           <script type="text/javascript">
 
           </script>
@@ -78,11 +84,57 @@ class App extends React.Component {
       })
     })
   }
+  onSelectHandle = (event) => {
+    let value = event.target.value
+    value = value.split(',')
+    this.setState({
+      html: value[0],
+      css: value[1],
+      js: value[2]
+    })
+  }
 
   render() {
+    let exampleOptions = this.state.examples.map(
+      (obj) => {
+        return <option value={obj.value} key={obj.value}>{`${obj.name}`}</option>
+      }
+    )
+
     return (
       <>
-        <div className="h4 pt-2 text-success text-center">Welcome to the HTML, CSS and JS Editor. We provide inbuilt Bootstrap 5 support. </div>
+        <div className="row p-2" >
+          {/* Button to show/hide offcanvas */}
+          <button className=" btn btn-warning col-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+          </button>
+          <span className="col-11 h4 text-success text-center" >Welcome to the HTML, CSS and JS Editor. We provide inbuilt Bootstrap 5 support.</span>
+        </div>
+
+        <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasMenuLabel">Select an example</h5>
+            <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div className="offcanvas-body">
+            <div>
+              Choose any of the option and check the output
+            </div>
+            <div className="dropdown mt-3">
+              <select className="form-select form-select-sm" aria-label=".form-select-sm example" onChange={this.onSelectHandle} >
+                {exampleOptions}
+              </select>
+            </div>
+            <div style={{textAlign:"right"}}>
+              <button className="btn btn-warning m-5" data-bs-dismiss="offcanvas">Back</button>
+            </div>
+          </div>
+          <div className="offcanvas-footer">
+            <div className="text-center text-primary p-2">Click on play button to run JS</div>
+          </div>
+        </div>
         <div className="row mb-5">
           <div className="col-sm-6 col-md-4">
             <span className="">HTML</span>
